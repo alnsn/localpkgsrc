@@ -1,0 +1,3 @@
+#!/bin/sh
+arg=`/sbin/route -n show | awk -v host=$1 -v port=$2 -f @PREFIX@/libexec/tor-ssh-proxy.awk`
+@PREFIX@/bin/socat STDIO "${arg}"

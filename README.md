@@ -1,2 +1,3 @@
-# localpkgsrc
-My "local" pkgsrc category
+My "local" pkgsrc category.
+
+Clone this repository to your root pkgsrc directory.

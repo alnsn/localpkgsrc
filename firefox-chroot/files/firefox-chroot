@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# -A askpass
+exec /usr/bin/env -i \
+	DISPLAY="${DISPLAY:?}" \
+	SUDO_ASKPASS=@PREFIX@/bin/x11-ssh-askpass \
+	@PREFIX@/bin/sudo -A @PREFIX@/libexec/firefox-chroot "$@"

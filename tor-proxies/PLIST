@@ -1,0 +1,4 @@
+@comment $NetBSD$
+libexec/tor-msmtp-proxy
+libexec/tor-ssh-proxy
+libexec/tor-ssh-proxy.awk
