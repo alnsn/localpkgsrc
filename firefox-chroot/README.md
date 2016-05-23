@@ -4,13 +4,19 @@ How to chroot www/firefox on NetBSD
 This quick guide explains how to install `www/firefox` on NetBSD into
 chroot directory `/home/webuser-chroot` and run it under `webuser` user.
 
+The guide assumes that `www/firefox` is built without audio and dri support:
+
+	PKG_DEFAULT_OPTIONS+=	-dri
+	PKG_OPTIONS.MesaLib=	-dri -llvm
+	PKG_OPTIONS.firefox=	-pulseaudio
+
 Your `X(7)` must be reconfigured to listen tcp:
 
 	# .xserverrc
 	X -listen tcp
 
 Don't forget to disable non-local hosts with `xhost` or by adding
-entries to `/etc/Xn.hosts`.
+entries to `/etc/X0.hosts`.
 
 Export variables
 ----------------
@@ -42,7 +48,7 @@ The above command also creates `/var/shm` for the new shared memory API but
 the current version (46.0.1) of `www/firefox` still uses the old API. It case
 it changes in a future, you should add a new mountpoint to `/etc/fstab`:
 
-	tmpfs		/home/webuser-chroot/var/shm	tmpfs	rw,nocoredump,-m1777,-sram%5
+	tmpfs		/home/webuser-chroot/var/shm	tmpfs	rw,noexec,nocoredump,-m1777,-sram%5
 
 The next command is very important because your firefox process
 must have access to random bits. For some reason, firefox doesn't
@@ -82,14 +88,14 @@ them with `pax -rw`:
 	
 	pkg_info -K "${CHROOT:?}/var/db/pkg" -Q REQUIRES firefox dejavu-ttf gdk-pixbuf2 | grep -v /usr/pkg/ | xargs readlink -f | pax -rw "${CHROOT:?}"
 
-The `gdk-pixbuf2` is installed as a dependency and it will be needed
-later to create a required file.
+The `gdk-pixbuf2` is listed among packages because it will be needed 
+later to create a required config file.
 
 Install the runtime linker:
 
 	pax -rw /libexec/ld.elf_so /usr/libexec/ld.elf_so "${CHROOT:?}"
 
-Install `i18n` libraries and other files:
+Install `i18n` libraries and other `i18n` files:
 
 	pax -rw /usr/lib/i18n /usr/share/i18n "${CHROOT:?}"
 
@@ -117,9 +123,9 @@ may be different). This file can be generated:
 Cleanup
 -------
 
-Packages in `pkgsrc` are rarely split into subpackages like `lib`, `dev`, `doc`
-etc. This introduces some unnecessary dependencies like `lang/python` or
-`lang/perl`. They can be removed with `pkg_delete -f`:
+Packages in `pkgsrc` are rarely split into subpackages like `libxxx`,
+`xxx-dev`, `xxx-doc` etc. This introduces some unnecessary dependencies
+like `lang/python` or `lang/perl`. They can be removed with `pkg_delete -f`:
 
 	pkg_delete -P "${CHROOT:?}" -K var/db/pkg -f perl python27 mozilla-rootcerts
 
@@ -138,7 +144,7 @@ Start firefox
 	/usr/bin/env -i USER=webuser HOME=/webuser DISPLAY=127.0.0.1:0.0 \
 		/usr/sbin/chroot -u webuser /home/webuser-chroot /usr/pkg/bin/firefox 
 
-or install `local/firefox-chroot` from this repository.
+or install `local/firefox-chroot` from this repository and run `firefox-chroot`.
 
 Misc
 ----
