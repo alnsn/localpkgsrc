@@ -32,7 +32,7 @@ SUBST_FILES.vars=	firefox-chroot firefox-chroot-libexec
 SUBST_VARS.vars=	PREFIX
 
 do-extract:
-	cp ${FILESDIR}/firefox-chroot*  ${WRKSRC}
+	cp ${FILESDIR}/firefox-chroot* ${WRKSRC}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/firefox-chroot ${DESTDIR}/${PREFIX}/bin/firefox-chroot
