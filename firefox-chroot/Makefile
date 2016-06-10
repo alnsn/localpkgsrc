@@ -12,8 +12,8 @@ LICENSE=	public-domain
 BUILD_DEPENDS+=	firefox>=46.0:../../www/firefox
 BUILD_DEPENDS+=	dejavu-ttf>=2.35:../../fonts/dejavu-ttf
 
-DEPENDS+=	sudo:../../security/sudo
-DEPENDS+=	ssh-askpass:../../security/ssh-askpass
+DEPENDS+=	sudo>=1.8.15:../../security/sudo
+DEPENDS+=	ssh-askpass>=1.0:../../security/ssh-askpass
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
