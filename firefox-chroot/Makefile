@@ -3,8 +3,8 @@
 PKGNAME=	firefox-chroot-1.0.0
 CATEGORIES=	www
 
-OWNER=		alnsn@andex.ru
-HOMEPAGE=	http://localhost
+OWNER=		alnsn@yandex.ru
+HOMEPAGE=	https://github.com/alnsn/localpkgsrc
 COMMENT=	chroot wrapper for firefox
 LICENSE=	public-domain
 
