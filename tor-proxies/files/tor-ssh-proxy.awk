@@ -27,6 +27,8 @@ pattern2 != "" && ($1 == pattern2 || $1 == pattern20) && index(host, match2) == 
 
 END {
 	if (verbose != "") {
+		print "host: " host "."
+		print "port: " port "."
 		print "match1: "  match1 "."
 		print "pattern1: "  pattern1 "."
 		print "pattern10: " pattern10 "."
