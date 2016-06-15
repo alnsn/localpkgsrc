@@ -15,6 +15,9 @@ $1=="default" {
 	match2 = a[1] "." a[2]
 	pattern2 = match2 "/16"
 	pattern20 = match2 ".0.0/16"
+
+	if (substr(host, 1, 4) == "127.")
+		matched = 1
 }
 
 pattern1 != "" && ($1 == pattern1 || $1 == pattern10) && index(host, match1) == 1 {
