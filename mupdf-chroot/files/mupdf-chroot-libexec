@@ -1,0 +1,17 @@
+#!/bin/sh
+
+user=webuser
+tz=Europe/London
+display=127.0.0.1:0.0
+proxy=bad://127.0.0.1:9999 # hahaha
+
+exec /usr/bin/env -i \
+	TZ=${tz}      \
+	USER=${user}   \
+	LOGNAME=${user} \
+	HOME=/${user}    \
+	DISPLAY=${display} \
+	http_proxy=${proxy} \
+	https_proxy=${proxy} \
+	/usr/sbin/chroot -u ${user} /home/${user}-chroot \
+		@PREFIX@/bin/mupdf "$@"
