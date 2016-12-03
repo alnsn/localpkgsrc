@@ -1,15 +1,15 @@
 # $Id$
 
-PKGNAME=	firefox-chroot-1.0.0
+PKGNAME=	firefox45-chroot-1.0.0
 CATEGORIES=	www
 
 OWNER=		alnsn@yandex.ru
 HOMEPAGE=	https://github.com/alnsn/localpkgsrc
-COMMENT=	chroot wrapper for www/firefox
+COMMENT=	chroot wrapper for www/firefox45
 LICENSE=	public-domain
 
 # Fake build dependencies to force building of these packages.
-BUILD_DEPENDS+=	firefox>=46.0:../../www/firefox
+BUILD_DEPENDS+=	firefox45>=45.0:../../www/firefox45
 BUILD_DEPENDS+=	dejavu-ttf>=2.35:../../fonts/dejavu-ttf
 
 DEPENDS+=	sudo>=1.8.15:../../security/sudo
@@ -28,14 +28,14 @@ INSTALLATION_DIRS=	bin libexec
 SUBST_CLASSES+=		vars
 SUBST_STAGE.vars=	pre-configure
 SUBST_MESSAGE.vars=	Configuring sources.
-SUBST_FILES.vars=	firefox-chroot firefox-chroot-libexec
+SUBST_FILES.vars=	firefox45-chroot firefox45-chroot-libexec
 SUBST_VARS.vars=	PREFIX
 
 do-extract:
-	cp ${FILESDIR}/firefox-chroot* ${WRKSRC}
+	cp ${FILESDIR}/firefox45-chroot* ${WRKSRC}
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/firefox-chroot ${DESTDIR}/${PREFIX}/bin/firefox-chroot
-	${INSTALL_SCRIPT} ${WRKSRC}/firefox-chroot-libexec ${DESTDIR}/${PREFIX}/libexec/firefox-chroot
+	${INSTALL_SCRIPT} ${WRKSRC}/firefox45-chroot ${DESTDIR}/${PREFIX}/bin/firefox45-chroot
+	${INSTALL_SCRIPT} ${WRKSRC}/firefox45-chroot-libexec ${DESTDIR}/${PREFIX}/libexec/firefox45-chroot
 
 .include "../../mk/bsd.pkg.mk"
