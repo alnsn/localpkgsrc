@@ -4,11 +4,9 @@ How to chroot www/firefox on NetBSD
 This quick guide explains how to install `www/firefox` on NetBSD into
 chroot directory `/home/webuser-chroot` and run it under `webuser` user.
 
-The guide assumes that `www/firefox` is built without audio and dri support:
+The guide assumes that `www/firefox` is built with the following options:
 
-	PKG_DEFAULT_OPTIONS+=	-dri
-	PKG_OPTIONS.MesaLib=	-dri -llvm
-	PKG_OPTIONS.firefox=	-pulseaudio
+	PKG_OPTIONS.firefox=		-dbus -alsa -pulseaudio oss
 
 Your `X(7)` must be reconfigured to listen tcp:
 
@@ -54,7 +52,7 @@ The next command is very important because your firefox process
 must have access to random bits. For some reason, firefox doesn't
 complain if these special files aren't accessible.
 
-	pax -rw /dev/random /dev/urandom /dev/null "${CHROOT:?}"
+	pax -rw /dev/random /dev/urandom /dev/null /dev/sound* /dev/mixer* "${CHROOT:?}"
 	
 	chmod a+w "${CHROOT:?}/dev/null"
 
