@@ -1,4 +1,4 @@
-How to chroot security/dillo on NetBSD
+How to chroot www/dillo on NetBSD
 ======================================
 
 Installation procedure is very similar to `www/firefox` and is
