@@ -1,10 +1,10 @@
 My "local" pkgsrc category.
 
-Clone this repository to your root pkgsrc directory.
-
 - tor-proxies - socat wrapper script to connect to smtp.yandex.ru over tor and ssh wrapper
 - icc11 - historical Intel compiler
 - \*-chroot - launchers for chrooted packages
+
+Clone this repository to your root pkgsrc directory.
 
 How to chroot www/firefox on NetBSD
 ===================================
