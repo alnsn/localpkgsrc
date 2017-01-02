@@ -3,7 +3,6 @@
 user=webuser
 tz=Europe/London
 display=127.0.0.1:0.0
-proxy=127.0.0.1:9050 # tor
 
 exec /usr/bin/env -i \
 	TZ=${tz}      \
@@ -12,4 +11,4 @@ exec /usr/bin/env -i \
 	HOME=/${user}    \
 	DISPLAY=${display} \
 	/usr/sbin/chroot -u ${user} /home/${user}-chroot \
-		@PREFIX@/bin/links -socks-proxy "${proxy}" -g "$@"
+		@PREFIX@/bin/links -only-proxies 1 -g "$@"
