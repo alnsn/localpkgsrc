@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 user=webuser
 home=/${user}
 tz=Europe/London
@@ -7,9 +9,11 @@ display=127.0.0.1:0.0
 
 cd "/home/${user}-chroot"
 
-if [ -r ${user}.tgz && ! -d tmp/webuser ]; then
-	(cd tmp && tar xzf ../${user}.tgz)
+if [ -r ${user}.tgz ]; then
 	home=/tmp/${user}
+	if [ ! -d tmp/webuser ]; then
+		(cd tmp && tar xzpf ../${user}.tgz)
+	fi
 fi
 
 exec /usr/bin/env -i  \
