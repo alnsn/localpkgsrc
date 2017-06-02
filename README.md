@@ -82,7 +82,8 @@ but it only works for installed packages. We install `www/firefox`
 and `fonts/dejavu-ttf` first and then go back to installing
 the barebone base system.
 
-	pkg_add -P "${CHROOT:?}" -K var/db/pkg "${PACKAGES:?}/firefox" "${PACKAGES:?}/dejavu-ttf"
+	export PKG_PATH="${PACKAGES:?}"
+	pkg_add -P "${CHROOT:?}" -K var/db/pkg firefox dejavu-ttf gnome-icon-theme gnome-theme
 
 Create barebone NetBSD base, part 2
 -----------------------------------
@@ -122,9 +123,7 @@ Firefox complains about missing
 `/usr/pkg/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache` (version number
 may be different). This file can be generated:
 
-	chroot "${CHROOT:?}" /usr/pkg/bin/gdk-pixbuf-query-loaders > "${TMPDIR:?}/loaders.cache"
-	
-	mv "${TMPDIR:?}/loaders.cache" "${CHROOT:?}/usr/pkg/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+	chroot "${CHROOT:?}" /usr/pkg/bin/gdk-pixbuf-query-loaders --update-cache
 
 Cleanup
 -------
