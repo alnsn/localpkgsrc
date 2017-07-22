@@ -5,7 +5,7 @@ CATEGORIES=	net security
 
 OWNER=		alnsn@andex.ru
 HOMEPAGE=	http://localhost
-COMMENT=	msmtp and ssh proxies
+COMMENT=	ssh proxies
 LICENSE=	public-domain
 
 DEPENDS+=	tor>=0.2.3:../../net/tor
@@ -24,17 +24,15 @@ INSTALLATION_DIRS=	libexec
 SUBST_CLASSES+=		vars
 SUBST_STAGE.vars=	pre-configure
 SUBST_MESSAGE.vars=	Configuring sources.
-SUBST_FILES.vars=	tor-msmtp-proxy tor-ssh-proxy
+SUBST_FILES.vars=	tor-ssh-proxy
 SUBST_VARS.vars=	PREFIX
 
-REPLACE_SH+=		tor-msmtp-proxy tor-ssh-proxy
+REPLACE_SH+=		tor-ssh-proxy
 
 do-extract:
-	cp ${FILESDIR}/tor-msmtp-proxy ${WRKSRC}
 	cp ${FILESDIR}/tor-ssh-proxy*  ${WRKSRC}
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/tor-msmtp-proxy ${DESTDIR}/${PREFIX}/libexec
 	${INSTALL_SCRIPT} ${WRKSRC}/tor-ssh-proxy*  ${DESTDIR}/${PREFIX}/libexec
 
 .include "../../mk/bsd.pkg.mk"
