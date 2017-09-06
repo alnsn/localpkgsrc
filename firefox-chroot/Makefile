@@ -9,7 +9,7 @@ COMMENT=	chroot wrapper for www/firefox
 LICENSE=	public-domain
 
 # Fake build dependencies to force building of these packages.
-BUILD_DEPENDS+=	firefox>=46.0:../../www/firefox
+BUILD_DEPENDS+=	firefox>=54.0:../../www/firefox
 BUILD_DEPENDS+=	dejavu-ttf>=2.35:../../fonts/dejavu-ttf
 
 DEPENDS+=	sudo>=1.8.15:../../security/sudo

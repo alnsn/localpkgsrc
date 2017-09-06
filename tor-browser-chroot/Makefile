@@ -9,7 +9,7 @@ COMMENT=	chroot wrapper for tor-browser
 LICENSE=	public-domain
 
 # Fake build dependencies to force building of these packages.
-BUILD_DEPENDS+=	tor-browser>=5.5.4:../../security/tor-browser
+BUILD_DEPENDS+=	tor-browser>=6.0.8:../../security/tor-browser
 BUILD_DEPENDS+=	dejavu-ttf>=2.35:../../fonts/dejavu-ttf
 
 DEPENDS+=	sudo>=1.8.15:../../security/sudo
