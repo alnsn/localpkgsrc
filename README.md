@@ -91,12 +91,10 @@ Create barebone NetBSD base, part 2
 Now list all dependencies with `pkg_info -Q REQUIRES` and install
 them with `pax -rw`:
 
-	pkg_info -K "${CHROOT:?}/var/db/pkg" -Q REQUIRES firefox dejavu-ttf gdk-pixbuf2 | grep -v /usr/pkg/ | pax -rw "${CHROOT:?}"
+	pkg_info -K "${CHROOT:?}/var/db/pkg" -Q REQUIRES -a | grep -v /usr/pkg/ | pax -rw "${CHROOT:?}"
 	
-	pkg_info -K "${CHROOT:?}/var/db/pkg" -Q REQUIRES firefox dejavu-ttf gdk-pixbuf2 | grep -v /usr/pkg/ | xargs readlink -f | pax -rw "${CHROOT:?}"
+	pkg_info -K "${CHROOT:?}/var/db/pkg" -Q REQUIRES -a | grep -v /usr/pkg/ | xargs readlink -f | pax -rw "${CHROOT:?}"
 
-The `gdk-pixbuf2` is listed among packages because it will be needed 
-later to create a required config file.
 
 Install the runtime linker:
 
