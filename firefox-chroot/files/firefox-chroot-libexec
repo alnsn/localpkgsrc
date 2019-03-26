@@ -6,21 +6,22 @@ user=webuser
 home=/${user}
 tz=Europe/London
 display=127.0.0.1:0.0
+chroot="/home/${user}-chroot"
+devroot="${chroot}/dev"
 
-cd "/home/${user}-chroot"
-
-if [ -r ${user}.tgz ]; then
-	home=/tmp/${user}
-	if [ ! -d tmp/webuser ]; then
-		(cd tmp && tar xzpf ../${user}.tgz)
-	fi
+if ! /bin/dd if=${devroot}/random of=${devroot}/null bs=1 count=1 msgfmt=quiet; then
+	/sbin/mount_tmpfs -s 65536 -n 128 -m 0755 tmpfs ${devroot}
+	trap "/sbin/umount ${devroot}" EXIT
+	cd ${devroot}
+	/dev/MAKEDEV std crypto audio video
+	cd "${OLDPWD}"
 fi
 
-exec /usr/bin/env -i  \
-	TZ=${tz}       \
-	HOME=${home}    \
-	USER=${user}     \
-	LOGNAME=${user}   \
+/usr/bin/env -i  \
+	TZ=${tz}   \
+	HOME=${home} \
+	USER=${user}   \
+	LOGNAME=${user}  \
 	DISPLAY=${display} \
-	/usr/sbin/chroot -u ${user} /home/${user}-chroot \
-		@PREFIX@/bin/firefox "$@"
+	/usr/sbin/chroot -u ${user} ${chroot} \
+		@PREFIX@/lib/firefox/firefox "$@"
