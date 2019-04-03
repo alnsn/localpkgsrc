@@ -11,7 +11,7 @@ devroot="${chroot}/dev"
 
 if ! /bin/dd if=${devroot}/random of=${devroot}/null bs=1 count=1 msgfmt=quiet; then
 	/sbin/mount_tmpfs -s 65536 -n 128 -m 0755 tmpfs ${devroot}
-	trap "/sbin/umount ${devroot}" EXIT
+	trap "/sbin/umount ${devroot} 2>/dev/null" EXIT
 	cd ${devroot}
 	/dev/MAKEDEV std crypto audio video
 	cd "${OLDPWD}"
