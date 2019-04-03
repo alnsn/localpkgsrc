@@ -4,4 +4,5 @@
 exec /usr/bin/env -i \
 	DISPLAY="${DISPLAY:?}" \
 	SUDO_ASKPASS=@PREFIX@/bin/x11-ssh-askpass \
-	@PREFIX@/bin/sudo -A @PREFIX@/libexec/firefox-chroot "$@"
+	@PREFIX@/bin/sudo -A --preserve-env=DISPLAY \
+	    @PREFIX@/libexec/firefox-chroot "$@"

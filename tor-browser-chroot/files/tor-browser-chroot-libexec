@@ -5,7 +5,7 @@ set -e
 user=webuser
 home=/${user}
 tz=Europe/London
-display=127.0.0.1:0.0
+display=127.0.0.1${DISPLAY:?}
 chroot="/home/${user}-chroot"
 devroot="${chroot}/dev"
 
